@@ -1,0 +1,9 @@
+{
+  "name": "Devc-Messenger-Chatbot",
+  "version": "1.0.0",
+  "description": "Proyecto del curso de Messenger Chatbots para Developer Circles",
+  "main": "app.js",
+  "repository": "https://github.com/Atticusnd/Devc-Messenger-Chatbot.git",
+  "author": "Adan Figueroa <fija90@gmail.com>",
+  "license": "MIT"
+}
