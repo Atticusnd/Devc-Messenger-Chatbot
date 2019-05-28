@@ -26,6 +26,20 @@ app.get("/webhook", (req, res) => {
     }
 });
 
+app.post("/webhook",(req,res)=>{
+    const body = req.body;
+    if(body.object === "page"){
+        res.status(200).send("EVENT_RECEIVED");
+        body.entry.forEach(function(entry){
+            let webhookEvent = entry.messaging[0];
+            console.log(webhookEvent);
+        });
+    }else{
+        res.sendStatus(404);
+    }
+})
+
+
 app.listen(app.get('port'), () => {
         console.log(`Servidor iniciado en  el puerto ${process.env.PORT}`);
 });
