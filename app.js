@@ -35,7 +35,7 @@ app.post("/webhook",(req,res)=>{
             let webhookEvent = entry.messaging[0];
             console.log(webhookEvent);
             handle.handleMessage(webhookEvent);
-          });
+        });
     }else{
         res.sendStatus(404);
     }
