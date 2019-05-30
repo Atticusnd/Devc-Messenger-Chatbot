@@ -6,8 +6,8 @@ exports.handleMessage = (webhookEvent) =>{
         let mensaje = webhookEvent.message;
         if(mensaje.quick_reply){
             handleQuickReplies(webhookEvent);
-        }else if(mensaje.attachements){
-            console.log("Envió un adjunto");
+        }else if(mensaje.attachments){
+            actions.stores(webhookEvent);
         }else if(mensaje.text){
             console.log("Envió un texto");
             actions.sendTextMessage("Has enviado texto", webhookEvent);
@@ -23,7 +23,7 @@ handlePostback = (webhookEvent) =>{
             actions.quickReplies(webhookEvent);
         break;
         case 'sucursales':
-            actions.sendTextMessage("Oprimiste sucursales",webhookEvent);
+            handleLocation(webhookEvent);
         break;
         case 'inicio':
             actions.sendTextMessage("Bienvenido al chatbot de DevC", webhookEvent);
@@ -54,4 +54,16 @@ handleQuickReplies = (webhookEvent) =>{
     }else{
         actions.sendTextMessage("Gracias por ayudarnos a mejorar",webhookEvent);
     }
+}
+
+handleLocation = (webhookEvent) =>{
+    const replyLocation ={
+        texto:'Por favor compartenos tú ubucación',
+        replies:[
+            {
+                content_type:"location"
+            }
+        ]
+    }
+    actions.quickReplies(webhookEvent,replyLocation);
 }
