@@ -9,8 +9,7 @@ exports.handleMessage = (webhookEvent) =>{
         }else if(mensaje.attachments){
             actions.stores(webhookEvent);
         }else if(mensaje.text){
-            console.log("Envió un texto");
-            actions.sendTextMessage("Has enviado texto", webhookEvent);
+            handleNLP(webhookEvent);
         }
     }else if(webhookEvent.postback){
         handlePostback(webhookEvent);
@@ -66,4 +65,15 @@ handleLocation = (webhookEvent) =>{
         ]
     }
     actions.quickReplies(webhookEvent,replyLocation);
+}
+
+handleNLP = (webhookEvent) =>{
+    let nlp = webhookEvent.message.nlp;
+    if(nlp.entities.mensaje){
+        if(nlp.entities.mensaje[0].value === "tiempoEntrega"){
+                actions.sendTextMessage("Nuestro tiempo de entrega es de 5 días hablies",webhookEvent);
+        }
+    }else{
+        actions.sendTextMessage("No te entiendo pero te puedo ayudar encontrando sucursaesles", webhookEvent);
+    }
 }

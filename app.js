@@ -33,7 +33,7 @@ app.post("/webhook",(req,res)=>{
         res.status(200).send("EVENT_RECEIVED");
         body.entry.forEach(function(entry){
             let webhookEvent = entry.messaging[0];
-            console.log(webhookEvent);
+            console.log(JSON.stringify(webhookEvent.message));
             handle.handleMessage(webhookEvent);
           });
     }else{
